@@ -21,7 +21,7 @@ $ npm install -g @dkmassive/proto
 $ proto COMMAND
 running command...
 $ proto (-v|--version|version)
-@dkmassive/proto/0.1.8 darwin-x64 node-v12.16.1
+@dkmassive/proto/0.1.9 darwin-x64 node-v12.16.1
 $ proto --help [COMMAND]
 USAGE
   $ proto COMMAND
@@ -32,7 +32,6 @@ USAGE
 Run commands from the theme directory.
 <!-- commands -->
 * [`proto component [NAME] [JS]`](#proto-component-name-js)
-* [`proto hello`](#proto-hello)
 * [`proto help [COMMAND]`](#proto-help-command)
 
 ## `proto component [NAME] [JS]`
@@ -55,25 +54,7 @@ DESCRIPTION
   Extra documentation goes here
 ```
 
-_See code: [src/commands/component.js](https://github.com/dk-massive/proto/blob/v0.1.8/src/commands/component.js)_
-
-## `proto hello`
-
-Describe the command here
-
-```
-USAGE
-  $ proto hello
-
-OPTIONS
-  -n, --name=name  name to print
-
-DESCRIPTION
-  ...
-  Extra documentation goes here
-```
-
-_See code: [src/commands/hello.js](https://github.com/dk-massive/proto/blob/v0.1.8/src/commands/hello.js)_
+_See code: [src/commands/component.js](https://github.com/dk-massive/proto/blob/v0.1.9/src/commands/component.js)_
 
 ## `proto help [COMMAND]`
 
