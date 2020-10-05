@@ -17,11 +17,11 @@ Prototype Starter Theme: https://www.drupal.org/project/prototype
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g proto
+$ npm install -g @dkmassive/proto
 $ proto COMMAND
 running command...
 $ proto (-v|--version|version)
-proto/0.1.0 darwin-x64 node-v12.16.1
+@dkmassive/proto/0.1.0 darwin-x64 node-v12.16.1
 $ proto --help [COMMAND]
 USAGE
   $ proto COMMAND
@@ -36,7 +36,7 @@ USAGE
 
 ## `proto component`
 
-Describe the command here
+Generate theme component with libraries.
 
 ```
 USAGE

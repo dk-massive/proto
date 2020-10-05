@@ -1,6 +1,14 @@
 const {Command, flags, args} = require('@oclif/command')
 const inquirer = require('inquirer')
-var mkdirp = require('mkdirp');
+const mkdirp = require('mkdirp');
+const createFile = require('create-file');
+const paramCase = require('param-case');
+
+const fs = require('file-system');
+
+// fs.mkdir('./derp', 777, function(err) {});
+// fs.mkdirSync('1/2/3/4/5', 777);
+// fs.writeFile('path/test.txt', 'aaa', function(err) {})
 
 class ComponentCommand extends Command {
   async run() {
@@ -19,11 +27,30 @@ class ComponentCommand extends Command {
     }
 
     this.log(`hello ${name} from /Users/devin/Repos/proto/src/commands/component.js`)
-    mkdirp('/derp', function(err) {
-      if(err) {
-        console.log(err)
-      }
-    });
+    // mkdirp('./derp').then( made => this.log(`made directories, starting with ${made}`)).catch(error => this.log(error))
+
+    const machineName = paramCase.paramCase(name)
+    const path = `./components/${machineName}`
+    const scss = `${path}/${machineName}.txt`
+    const twig = `${path}/${machineName}.twig`
+
+    this.log(scss);
+
+    fs.mkdir(path, 755, error => {
+      if (error) this.log(error)
+    })
+
+    fs.writeFile(scss, 'aaa', { encoding: 'utf8', mode: 755 },error => {
+      if (error) this.log(error)
+    })
+
+    fs.writeFile(twig, 'aaa', { encoding: 'utf8', mode: 755 }, error => {
+      if (error) this.log(error)
+    })
+
+    // createFile('./derp/to/file/to-create', 'my content\n',  () => {
+    //   // file either already exists or is now created (including non existing directories)
+    // });
   }
 }
 

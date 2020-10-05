@@ -1,18 +1,23 @@
 {
-  "name": "proto",
+  "name": "@dkmassive/proto",
   "description": "Command line tool for theming with the Drupal Protoype starter theme.",
   "version": "0.1.0",
   "author": "Devin Kendall",
   "bin": {
-    "proto": "./bin/run"
+    "proto": "bin/run"
   },
-  "bugs": "https://github.com/dk-massive/proto/issues",
+  "bugs": {
+    "url": "https://github.com/dk-massive/proto/issues"
+  },
   "dependencies": {
     "@oclif/command": "^1.8.0",
     "@oclif/config": "^1.17.0",
     "@oclif/plugin-help": "^3.2.0",
+    "create-file": "^1.0.1",
+    "file-system": "^2.2.2",
     "inquirer": "^7.3.3",
-    "mkdirp": "^1.0.4"
+    "mkdirp": "^1.0.4",
+    "param-case": "^3.0.3"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
@@ -42,7 +47,10 @@
       "@oclif/plugin-help"
     ]
   },
-  "repository": "dk-massive/proto",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dk-massive/proto.git"
+  },
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",
     "posttest": "eslint .",
