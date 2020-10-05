@@ -1,7 +1,7 @@
 {
   "name": "@dkmassive/proto",
   "description": "Command line tool for theming with the Drupal Protoype starter theme.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Devin Kendall",
   "bin": {
     "proto": "bin/run"
