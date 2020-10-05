@@ -44,10 +44,10 @@ class ComponentCommand extends Command {
     const scss = `${path}/${machineName}.scss`
     const twig = `${path}/${machineName}.twig`
     const jsFile = `${path}/${machineName}.js`
-    const files = find.fileSync(/\.libraries\.yml$/, './')
-    const themeFile = `./${files[0]}`;
-    const file = read.sync(themeFile, 'utf8');
-    const themeConfig = YAML.parse(file)
+    const libraryFiles = find.fileSync(/\.libraries\.yml$/, './')
+    const themeFiles = find.fileSync(/\.info\.yml$/, './')
+    const themeFile = read.sync(`./${themeFiles[0]}`, 'utf8');
+    const themeConfig = YAML.parse(themeFile)
 
     const scssTemplate = `@import "_partials";
 
@@ -100,11 +100,11 @@ ${machineName}:
 
     fs.writeFileSync(twig, twigTemplate, {encoding: 'utf8', mode: 0o777})
 
-    fs.appendFileSync(themeFile, libraryEntry)
+    fs.appendFileSync(`./${libraryFiles[0]}`, libraryEntry)
 
     if (useJs) {
       fs.writeFileSync(jsFile, jsTemplate, {encoding: 'utf8', mode: 0o777})
-      fs.appendFileSync(themeFile, libraryEntryJs);
+      fs.appendFileSync(`./${libraryFiles[0]}`, libraryEntryJs);
     }
 
   }
