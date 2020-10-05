@@ -21,7 +21,7 @@ $ npm install -g @dkmassive/proto
 $ proto COMMAND
 running command...
 $ proto (-v|--version|version)
-@dkmassive/proto/0.1.4 darwin-x64 node-v12.16.1
+@dkmassive/proto/0.1.5 darwin-x64 node-v12.16.1
 $ proto --help [COMMAND]
 USAGE
   $ proto COMMAND
@@ -54,7 +54,7 @@ DESCRIPTION
   Extra documentation goes here
 ```
 
-_See code: [src/commands/component.js](https://github.com/dk-massive/proto/blob/v0.1.4/src/commands/component.js)_
+_See code: [src/commands/component.js](https://github.com/dk-massive/proto/blob/v0.1.5/src/commands/component.js)_
 
 ## `proto hello`
 
@@ -72,7 +72,7 @@ DESCRIPTION
   Extra documentation goes here
 ```
 
-_See code: [src/commands/hello.js](https://github.com/dk-massive/proto/blob/v0.1.4/src/commands/hello.js)_
+_See code: [src/commands/hello.js](https://github.com/dk-massive/proto/blob/v0.1.5/src/commands/hello.js)_
 
 ## `proto help [COMMAND]`
 

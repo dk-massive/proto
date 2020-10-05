@@ -44,7 +44,7 @@ class ComponentCommand extends Command {
     const scss = `${path}/${machineName}.scss`
     const twig = `${path}/${machineName}.twig`
     const jsFile = `${path}/${machineName}.js`
-    const files = find.fileSync(/\.info\.yml$/, './')
+    const files = find.fileSync(/\.libraries\.yml$/, './')
     const themeFile = `./${files[0]}`;
     const file = read.sync(themeFile, 'utf8');
     const themeConfig = YAML.parse(file)
