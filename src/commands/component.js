@@ -11,10 +11,6 @@ var read = require('read-file');
 
 const fs = require('file-system');
 
-// fs.mkdir('./derp', 777, function(err) {});
-// fs.mkdirSync('1/2/3/4/5', 777);
-// fs.writeFile('path/test.txt', 'aaa', function(err) {})
-
 class ComponentCommand extends Command {
   async run() {
     const {args} = this.parse(ComponentCommand)
@@ -31,8 +27,17 @@ class ComponentCommand extends Command {
       name = responses.name
     }
 
-    this.log(`hello ${name} from /Users/devin/Repos/proto/src/commands/component.js`)
-    // mkdirp('./derp').then( made => this.log(`made directories, starting with ${made}`)).catch(error => this.log(error))
+    let useJs = args.js
+
+    if (!useJs) {
+      let responses = await inquirer.prompt([{
+        name: 'js',
+        message: 'Create JS file with component?',
+        type: 'confirm',
+        default: false,
+      }])
+      useJs = responses.js
+    }
 
     const machineName = paramCase.paramCase(name)
     const path = `./components/${machineName}`
@@ -77,6 +82,17 @@ class ComponentCommand extends Command {
   };
 })(jQuery, Drupal);`
 
+    const libraryEntry = `
+# ${name}
+${machineName}:
+  css:
+    component:
+      build/components/${machineName}/${machineName}.css: {}`
+
+    const libraryEntryJs = `
+  js:
+    build/components/${machineName}/${machineName}.js: {}`
+
 
     fs.mkdir(path, 0o777, error => {
       if (error) this.log(error)
@@ -90,9 +106,18 @@ class ComponentCommand extends Command {
       if (error) this.log(error)
     })
 
-    fs.writeFile(jsFile, jsTemplate, {encoding: 'utf8', mode: 0o777}, error => {
-      if (error) this.log(error)
-    })
+    fs.appendFile(themeFile, libraryEntry, function (err) {
+      if (err) throw err
+    });
+
+    if (useJs) {
+      fs.writeFile(jsFile, jsTemplate, {encoding: 'utf8', mode: 0o777}, error => {
+        if (error) this.log(error)
+      })
+      fs.appendFile(themeFile, libraryEntryJs, function (err) {
+        if (err) throw err
+      });
+    }
 
   }
 }
@@ -110,7 +135,12 @@ ComponentCommand.args = [
   {
     name: 'name',               // name of arg to show in help and reference with args[name]
     description: 'Component human readable name', // help description
-    hidden: true,               // hide this arg from help
+    hidden: false,               // hide this arg from help
+  },
+  {
+    name: 'js',               // name of arg to show in help and reference with args[name]
+    description: 'Create JS file with component', // help description
+    hidden: false,               // hide this arg from help
   },
 ]
 
