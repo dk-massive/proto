@@ -1,15 +1,10 @@
-const {Command, flags, args} = require('@oclif/command')
+const {Command, flags} = require('@oclif/command')
 const inquirer = require('inquirer')
-const mkdirp = require('mkdirp');
-const createFile = require('create-file');
-const paramCase = require('param-case');
+const paramCase = require('param-case')
 const YAML = require('yaml')
 const find = require('find')
-
-var read = require('read-file');
-
-
-const fs = require('file-system');
+const read = require('read-file')
+const fs = require('file-system')
 
 class ComponentCommand extends Command {
   async run() {
