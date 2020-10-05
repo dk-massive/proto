@@ -77,9 +77,9 @@ class ComponentCommand extends Command {
     attach: function (context, settings) {
       $('.js-${machineName}', context).once('${machineName}ComponentBehavior').each(function () {
 
-      });
-    }
-  };
+      })
+    },
+  }
 })(jQuery, Drupal);`
 
     const libraryEntry = `
@@ -94,29 +94,17 @@ ${machineName}:
     build/components/${machineName}/${machineName}.js: {}`
 
 
-    fs.mkdir(path, 0o777, error => {
-      if (error) this.log(error)
-    })
+    fs.mkdirSync(path, 0o777)
 
-    fs.writeFile(scss, scssTemplate, {encoding: 'utf8', mode: 0o777}, error => {
-      if (error) this.log(error)
-    })
+    fs.writeFileSync(scss, scssTemplate, {encoding: 'utf8', mode: 0o777})
 
-    fs.writeFile(twig, twigTemplate, {encoding: 'utf8', mode: 0o777}, error => {
-      if (error) this.log(error)
-    })
+    fs.writeFileSync(twig, twigTemplate, {encoding: 'utf8', mode: 0o777})
 
-    fs.appendFile(themeFile, libraryEntry, function (err) {
-      if (err) throw err
-    });
+    fs.appendFileSync(themeFile, libraryEntry)
 
     if (useJs) {
-      fs.writeFile(jsFile, jsTemplate, {encoding: 'utf8', mode: 0o777}, error => {
-        if (error) this.log(error)
-      })
-      fs.appendFile(themeFile, libraryEntryJs, function (err) {
-        if (err) throw err
-      });
+      fs.writeFileSync(jsFile, jsTemplate, {encoding: 'utf8', mode: 0o777})
+      fs.appendFileSync(themeFile, libraryEntryJs);
     }
 
   }
