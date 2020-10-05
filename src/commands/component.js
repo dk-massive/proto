@@ -36,7 +36,7 @@ class ComponentCommand extends Command {
 
     const machineName = paramCase.paramCase(name)
     const path = `./components/${machineName}`
-    const scss = `${path}/${machineName}.txt`
+    const scss = `${path}/${machineName}.scss`
     const twig = `${path}/${machineName}.twig`
     const jsFile = `${path}/${machineName}.js`
     const files = find.fileSync(/\.info\.yml$/, './')
