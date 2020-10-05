@@ -3,6 +3,11 @@ const inquirer = require('inquirer')
 const mkdirp = require('mkdirp');
 const createFile = require('create-file');
 const paramCase = require('param-case');
+const YAML = require('yaml')
+const find = require('find')
+
+var read = require('read-file');
+
 
 const fs = require('file-system');
 
@@ -33,24 +38,62 @@ class ComponentCommand extends Command {
     const path = `./components/${machineName}`
     const scss = `${path}/${machineName}.txt`
     const twig = `${path}/${machineName}.twig`
+    const jsFile = `${path}/${machineName}.js`
+    const files = find.fileSync(/\.info\.yml$/, './')
+    const themeFile = `./${files[0]}`;
+    const file = read.sync(themeFile, 'utf8');
+    const themeConfig = YAML.parse(file)
 
-    this.log(scss);
+    const scssTemplate = `@import "_partials";
 
-    fs.mkdir(path, 755, error => {
+.c-${machineName} {
+
+
+}`
+    const twigTemplate = `
+{% import '@${themeConfig.package}-components/component.twig' as component %}
+{% do attach_library('${themeConfig.package}/${machineName}') %}
+
+<div {{ component.attributes('c-${machineName}', modifiers, attr) }}>
+  {{ content }}
+</div>
+
+
+{#Include this snippet in the drupal twig template.#}
+{#{%#}
+{#  include '@${themeConfig.package}-components/${machineName}/${machineName}.twig' with {#}
+{#    attr: attributes.addClass(classes),#}
+{#    content: content,#}
+{#  } only#}
+{#%}#}`
+
+    const jsTemplate = `(function ($, Drupal) {
+  const self = Drupal.behaviors.${machineName}ComponentBehavior = {
+    attach: function (context, settings) {
+      $('.js-${machineName}', context).once('${machineName}ComponentBehavior').each(function () {
+
+      });
+    }
+  };
+})(jQuery, Drupal);`
+
+
+    fs.mkdir(path, 0o777, error => {
       if (error) this.log(error)
     })
 
-    fs.writeFile(scss, 'aaa', { encoding: 'utf8', mode: 755 },error => {
+    fs.writeFile(scss, scssTemplate, {encoding: 'utf8', mode: 0o777}, error => {
       if (error) this.log(error)
     })
 
-    fs.writeFile(twig, 'aaa', { encoding: 'utf8', mode: 755 }, error => {
+    fs.writeFile(twig, twigTemplate, {encoding: 'utf8', mode: 0o777}, error => {
       if (error) this.log(error)
     })
 
-    // createFile('./derp/to/file/to-create', 'my content\n',  () => {
-    //   // file either already exists or is now created (including non existing directories)
-    // });
+    fs.writeFile(jsFile, jsTemplate, {encoding: 'utf8', mode: 0o777}, error => {
+      if (error) this.log(error)
+    })
+
   }
 }
 

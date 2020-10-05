@@ -1,7 +1,7 @@
 {
   "name": "@dkmassive/proto",
   "description": "Command line tool for theming with the Drupal Protoype starter theme.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Devin Kendall",
   "bin": {
     "proto": "bin/run"
@@ -15,9 +15,12 @@
     "@oclif/plugin-help": "^3.2.0",
     "create-file": "^1.0.1",
     "file-system": "^2.2.2",
+    "find": "^0.3.0",
     "inquirer": "^7.3.3",
     "mkdirp": "^1.0.4",
-    "param-case": "^3.0.3"
+    "param-case": "^3.0.3",
+    "read-file": "^0.2.0",
+    "yaml": "^1.10.0"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
